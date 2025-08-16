@@ -332,19 +332,33 @@ export default function AlphabetGame() {
     }
   };
 
-  const isTraceCorrect = (userTrace, referenceTrace, tolerance = 50) => {
-    if (userTrace.length === 0) return false;
-    let matchedPoints = 0;
-    for (let refPoint of referenceTrace) {
-      const closeEnough = userTrace.some(userPoint => {
-        const dx = userPoint.x - refPoint.x;
-        const dy = userPoint.y - refPoint.y;
-        return Math.sqrt(dx * dx + dy * dy) <= tolerance;
-      });
-      if (closeEnough) matchedPoints++;
+  // const isTraceCorrect = (userTrace, referenceTrace, tolerance = 50) => {
+  //   if (userTrace.length === 0) return false;
+  //   let matchedPoints = 0;
+  //   for (let refPoint of referenceTrace) {
+  //     const closeEnough = userTrace.some(userPoint => {
+  //       const dx = userPoint.x - refPoint.x;
+  //       const dy = userPoint.y - refPoint.y;
+  //       return Math.sqrt(dx * dx + dy * dy) <= tolerance;
+  //     });
+  //     if (closeEnough) matchedPoints++;
+  //   }
+  //   return matchedPoints >= referenceTrace.length * 0.8;
+  // };
+const isTraceCorrect = (userTrace, referenceTrace, tolerance = 25) => {
+  if (userTrace.length === 0) return false;
+
+  let currentRefIndex = 0;
+  for (let point of userTrace) {
+    const dx = point.x - referenceTrace[currentRefIndex].x;
+    const dy = point.y - referenceTrace[currentRefIndex].y;
+    if (Math.sqrt(dx * dx + dy * dy) <= tolerance) {
+      currentRefIndex++;
+      if (currentRefIndex >= referenceTrace.length) break;
     }
-    return matchedPoints >= referenceTrace.length * 0.8;
-  };
+  }
+  return currentRefIndex >= referenceTrace.length;
+};
 
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
@@ -453,9 +467,9 @@ const styles = StyleSheet.create({
   },
   traceDot: {
     position: 'absolute',
-    width: 10,
-    height: 10,
-    borderRadius: 5,
+    width: 12,
+    height: 12,
+    borderRadius: 6,
   },
   button: {
     backgroundColor: '#4CAF50',

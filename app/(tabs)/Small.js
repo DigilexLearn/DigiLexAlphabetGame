@@ -5,17 +5,21 @@ import Svg, { Polyline } from 'react-native-svg';
 
 const letters = [
 {
-  id: 1,
+id: 1,
   name: 'a',
   tracePath: [
-    { x: 120, y: 180 },  // 1. top of circle
-    { x: 100, y: 160 },  // 2. upper left
-    { x: 110, y: 130 },  // 3. bottom left
-    { x: 130, y: 130 },  // 4. bottom right
-    { x: 140, y: 155 },  // 5. upper right
-    { x: 120, y: 180 },  // 6. back to top (complete circle)
-    { x: 140, y: 190 },  // 7. stem top
-    { x: 140, y: 130 }   // 8. stem bottom
+   { x: 170, y: 100 },
+    // Draw oval clockwise
+    { x: 190, y: 110 }, // Right side
+    { x: 190, y: 140 }, // Bottom
+    { x: 170, y: 150 }, // Left side
+    { x: 150, y: 140 }, // Top left
+    { x: 150, y: 110 }, // Top
+    // Close the oval
+    { x: 170, y: 100 },
+    // Tail (from right side)
+    { x: 190, y: 125 }, // Midpoint of right side
+    { x: 210, y: 125 }  // Tail end
   ]
 }
 ,
@@ -328,19 +332,36 @@ export default function AlphabetGame() {
     }
   };
 
-  const isTraceCorrect = (userTrace, referenceTrace, tolerance = 50) => {
-    if (userTrace.length === 0) return false;
-    let matchedPoints = 0;
-    for (let refPoint of referenceTrace) {
-      const closeEnough = userTrace.some(userPoint => {
-        const dx = userPoint.x - refPoint.x;
-        const dy = userPoint.y - refPoint.y;
-        return Math.sqrt(dx * dx + dy * dy) <= tolerance;
-      });
-      if (closeEnough) matchedPoints++;
+  // const isTraceCorrect = (userTrace, referenceTrace, tolerance = 50) => {
+  //   if (userTrace.length === 0) return false;
+  //   let matchedPoints = 0;
+  //   for (let refPoint of referenceTrace) {
+  //     const closeEnough = userTrace.some(userPoint => {
+  //       const dx = userPoint.x - refPoint.x;
+  //       const dy = userPoint.y - refPoint.y;
+  //       return Math.sqrt(dx * dx + dy * dy) <= tolerance;
+  //     });
+  //     if (closeEnough) matchedPoints++;
+  //   }
+  //   return matchedPoints >= referenceTrace.length * 0.8;
+  // };
+
+
+  const isTraceCorrect = (userTrace, referenceTrace, tolerance = 33) => {
+  if (userTrace.length === 0) return false;
+
+  let currentRefIndex = 0;
+  for (let point of userTrace) {
+    const dx = point.x - referenceTrace[currentRefIndex].x;
+    const dy = point.y - referenceTrace[currentRefIndex].y;
+    if (Math.sqrt(dx * dx + dy * dy) <= tolerance) {
+      currentRefIndex++;
+      if (currentRefIndex >= referenceTrace.length) break;
     }
-    return matchedPoints >= referenceTrace.length * 0.8;
-  };
+  }
+  return currentRefIndex >= referenceTrace.length;
+};
+
 
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
@@ -445,10 +466,14 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   traceDot: {
-    position: 'absolute',
-    width: 10,
-    height: 10,
-    borderRadius: 5,
+     position: 'absolute',
+    // width: 10,
+    // height: 10,
+    // borderRadius: 5,
+    width: 12,  // Was 10
+  height: 12, // Was 10
+  borderRadius: 6
+
   },
   button: {
     backgroundColor: '#4CAF50',
