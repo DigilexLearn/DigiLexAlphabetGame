@@ -8,7 +8,10 @@ export default function Welcome() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to the Game!</Text>
-      <TouchableOpacity style={styles.button} onPress={() => router.push('/ModeSelection')}>
+      <TouchableOpacity 
+        style={styles.button} 
+        onPress={() => router.push('/ModeSelection')}   // ✅ ModeSelection screen par jaayega
+      >
         <Text style={styles.buttonText}>Start Learning </Text>
       </TouchableOpacity>
     </View>

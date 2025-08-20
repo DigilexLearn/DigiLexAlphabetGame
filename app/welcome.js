@@ -1,25 +1,31 @@
-// app/WelcomeScreen.js
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 
-export default function WelcomeScreen() {
+export default function Welcome() {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Digilex</Text>
+      <Text style={styles.title}>Welcome to the Game!</Text>
 
-      <TouchableOpacity style={styles.button} onPress={() => router.push('/ModeSelection')}>
+      {/* Purana button */}
+      <TouchableOpacity style={styles.buttonGreen} onPress={() => router.push('/ModeSelection')}>
         <Text style={styles.buttonText}>Start Learning</Text>
+      </TouchableOpacity>
+
+      {/* Naya button */}
+      <TouchableOpacity style={styles.buttonPink} onPress={() => router.push('/games/WordMatchScreen')}>
+        <Text style={styles.buttonText}>Play Word Match</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex:1, justifyContent:'center', alignItems:'center', backgroundColor:'#fff' },
-  title: { fontSize:28, fontWeight:'bold', marginBottom:30 },
-  button: { backgroundColor:'#ce697aff', padding:15, borderRadius:10, width:250 },
-  buttonText: { color:'#fff', fontSize:18, textAlign:'center' },
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', gap: 14 },
+  title: { fontSize: 26, fontWeight: 'bold', marginBottom: 24 },
+  buttonGreen: { backgroundColor: '#4CAF50', padding: 15, borderRadius: 8, minWidth: 220, alignItems: 'center' },
+  buttonPink: { backgroundColor: '#E8A2B4', padding: 15, borderRadius: 8, minWidth: 220, alignItems: 'center' },
+  buttonText: { color: '#fff', fontSize: 18, fontWeight: '700' },
 });
