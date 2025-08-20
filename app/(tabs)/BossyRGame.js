@@ -23,7 +23,9 @@ const BossyRGame = () => {
   const [showTryAgain, setShowTryAgain] = useState(false);
   const { streak, updateStreak, resetStreak } = useStreakSystem();
 
-  const demoUserId = 'demoUser123';
+  // const demoUserId = 'demoUser123';
+  const demoUserId = userId || 'guestUser';
+
 
   useEffect(() => {
     // Debug logs

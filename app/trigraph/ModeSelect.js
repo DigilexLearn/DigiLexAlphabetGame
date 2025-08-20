@@ -29,6 +29,6 @@ export default function TrigraphModeSelect() {
 const styles = StyleSheet.create({
   container:{ flex:1, justifyContent:'center', alignItems:'center', backgroundColor:'#fff', padding:20 },
   title:{ fontSize:26, fontWeight:'bold', marginBottom:30, color:'#333' },
-  button:{ backgroundColor:'#2196F3', paddingVertical:12, paddingHorizontal:25, borderRadius:10, marginVertical:10, width:240, alignItems:'center' },
+  button:{ backgroundColor:'#1a85b6ff', paddingVertical:12, paddingHorizontal:25, borderRadius:10, marginVertical:10, width:240, alignItems:'center' },
   buttonText:{ color:'#fff', fontSize:18, fontWeight:'600' },
 });

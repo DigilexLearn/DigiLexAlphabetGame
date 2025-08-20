@@ -84,6 +84,6 @@ const styles = StyleSheet.create({
   example: { opacity: 0.7 },
   backBtn: { alignSelf: 'center', padding: 10, marginTop: 8 },
   backText: { fontSize: 16, color: '#2196F3' },
-  button: { backgroundColor:'#4CAF50', padding:10, borderRadius:8, alignItems:'center' },
+  button: { backgroundColor:'#681068ff', padding:10, borderRadius:8, alignItems:'center' },
   buttonText: { color:'#fff', fontSize:16 }
 });

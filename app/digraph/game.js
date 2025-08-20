@@ -30,6 +30,7 @@ export default function DigraphGame() {
             score,
             timestamp: serverTimestamp()
           });
+          console.log("✅ Score uploaded:", { userId, type, level, score });
         } catch (e) {
           console.error('Error uploading score:', e);
         }
@@ -49,29 +50,27 @@ export default function DigraphGame() {
 
   if (!currentWord) return <Text>No words found for this level.</Text>;
 
-  // Get all unique sounds from data
+  // Get all unique sounds
   const allSounds = Array.from(
     new Set(Object.values(dataSource).flat().map(item => item.sound))
   );
 
-  // Get wrong options (exclude correct)
+  // Wrong options
   const wrongOptions = allSounds
     .filter(sound => sound !== currentWord.sound)
     .sort(() => Math.random() - 0.5)
-    .slice(0, 2); // pick only 2 wrong sounds
+    .slice(0, 2);
 
   // Merge and shuffle
   const options = [currentWord.sound, ...wrongOptions].sort(() => Math.random() - 0.5);
 
   const handleAnswer = (selected) => {
     if (selected === currentWord.sound) {
-      // Correct answer
       setScore(prev => prev + 1);
       Alert.alert('✅ Correct!', 'Good job!', [
         { text: 'Next', onPress: () => setCurrentIndex(prev => prev + 1) }
       ]);
     } else {
-      // Wrong answer
       Alert.alert('❌ Wrong', 'Try again!', [{ text: 'OK' }]);
     }
   };

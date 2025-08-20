@@ -52,14 +52,14 @@ const styles = StyleSheet.create({
   card:{ padding:14, borderRadius:12, borderWidth:1, borderColor:'#ddd', marginBottom:12 },
   sound:{ fontSize:20, fontWeight:'800' },
   example:{ opacity:0.7, marginTop:4 },
-  playBtn:{ marginTop:10, backgroundColor:'#4CAF50', padding:10, borderRadius:8, alignItems:'center' },
+  playBtn:{ marginTop:10, backgroundColor:'#681068ff', padding:10, borderRadius:8, alignItems:'center' },
   playText:{ color:'#fff', fontWeight:'700' },
 
   // ✅ Consistent Back Button UI
   button: {
     marginTop: 16,
     alignSelf: 'center',
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#734381ff',
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 10,

@@ -20,6 +20,6 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
   container: { flex:1, justifyContent:'center', alignItems:'center', backgroundColor:'#fff' },
   title: { fontSize:28, fontWeight:'bold', marginBottom:30 },
-  button: { backgroundColor:'#28A745', padding:15, borderRadius:10, width:250 },
+  button: { backgroundColor:'#ce697aff', padding:15, borderRadius:10, width:250 },
   buttonText: { color:'#fff', fontSize:18, textAlign:'center' },
 });

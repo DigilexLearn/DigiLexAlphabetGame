@@ -39,6 +39,6 @@ export default function DigraphModeSelect() {
 const styles = StyleSheet.create({
   container:{ flex:1, justifyContent:'center', alignItems:'center', backgroundColor:'#fff' },
   title:{ fontSize:26, fontWeight:'bold', marginBottom:30 },
-  button:{ backgroundColor:'#4CAF50', padding:15, marginBottom:15, borderRadius:10, width:250 },
+  button:{ backgroundColor:'#1a85b6ff', padding:15, marginBottom:15, borderRadius:10, width:250 },
   buttonText:{ color:'#fff', fontSize:18, textAlign:'center' },
 });

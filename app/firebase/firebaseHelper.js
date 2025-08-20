@@ -1,24 +1,17 @@
-// app/firebase/firebaseHelper.js
-import { db } from './firebaseConfig';
-import { collection, addDoc } from 'firebase/firestore';
+// firebaseHelper.js
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "./firebaseConfig";
 
-/**
- * Logs user progress to Firestore under "userProgress" collection.
- * 
- * @param {string} userId - Unique user ID
- * @param {string} gameName - Name of the game/module (e.g., 'BossyRGame')
- * @param {object} progressData - Object containing progress details such as level, word, selected option, etc.
- */
-export const logUserProgress = async (userId, gameName, progressData) => {
+export const logUserProgress = async (userId, level, data) => {
   try {
     await addDoc(collection(db, "userProgress"), {
       userId,
-      game: gameName,
-      ...progressData,
-      timestamp: new Date(),
+      level,
+      ...data,
+      timestamp: serverTimestamp(),
     });
-    console.log("✅ Progress saved successfully.");
+    console.log("Progress logged:", data);
   } catch (error) {
-    console.error("❌ Error saving progress:", error);
+    console.error("Error logging progress:", error);
   }
 };
